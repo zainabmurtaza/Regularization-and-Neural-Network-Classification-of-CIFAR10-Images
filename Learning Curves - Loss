@@ -1,0 +1,16 @@
+# For visualization, please visit: https://colab.research.google.com/drive/14zT3-BUHh1AcGASbVArtM-C-p8iB18uo#scrollTo=owqAnuvMYVll
+
+plt.plot(model.history.history['loss'])
+plt.plot(model.history.history['val_loss'])
+plt.title('model loss')
+plt.ylabel('loss')
+plt.xlabel('epoch')
+plt.legend(['train Loss', 'test Loss'], loc='upper right')
+plt.show()
+
+"""
+Yes, the model overfits as the training loss illustrates a gradual, steady decline with the increase in number of epochs, 
+while the validation loss is substantially larger than the training loss. 
+The training loss keeps decreasing towards the last epochs, 
+but the validation loss constitutes an unstable nature and hits sharp upward and downward peaks.
+"""
