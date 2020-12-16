@@ -1,0 +1,19 @@
+tuner.get_best_hyperparameters()[0].values
+
+temp = tuner.get_best_hyperparameters()[0]
+
+print ( 
+  ' Activation Function:', temp.get('activation'),
+'\n Dropout Layer is:', temp.get('dropout_layer'),
+'\n Learning Rate is:', temp.get('learning_rate'),
+'\n Units Layer is:', temp.get('units_layer'),
+'\n This is the best hyper-parameter combination that returns the best trained model.')
+
+
+"""
+ Activation Function: relu 
+ Dropout Layer is: 0.2 
+ Learning Rate is: 0.0034684141049002863 
+ Units Layer is: 512 
+ This is the best hyper-parameter combination that returns the best trained model.
+ """
