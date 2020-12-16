@@ -1,0 +1,25 @@
+lr_schedule = tf.keras.optimizers.schedules.ExponentialDecay(initial_learning_rate=1e-3, decay_steps=1000, decay_rate=0.9)
+
+model.compile(optimizer=opt,
+              loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+              metrics=['accuracy'])
+
+# Model Fitting
+model.fit(train_images, train_labels, validation_data=(validation_images, validation_labels), epochs=20)
+
+# Plotting Losses
+plt.plot(model.history.history['loss'])
+plt.plot(model.history.history['val_loss'])
+plt.title('model loss')
+plt.ylabel('loss')
+plt.xlabel('epoch')
+plt.legend(['train Loss', 'test Loss'], loc='upper right')
+plt.show()
+
+# https://colab.research.google.com/drive/14zT3-BUHh1AcGASbVArtM-C-p8iB18uo#scrollTo=mhr7dnr4Eb4m
+
+"""
+This model overfits, even with an exponential learning rate of 0.001. 
+The validation loss trend is not as extreme as it was in our first illustration, but results with Batch Normalization, 
+LRS and SGD optimizer amalgamated together can be deemed better.
+"""
