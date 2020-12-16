@@ -1,0 +1,22 @@
+opt = tf.keras.optimizers.SGD(learning_rate=lr_schedule, momentum=0.98, nesterov=True)
+
+model.compile(optimizer=opt,
+              loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+              metrics=['accuracy'])
+
+# Model Fitting
+model.fit(train_images, train_labels, validation_data=(validation_images, validation_labels), epochs=20)
+
+# Plotting Losses
+plt.plot(model.history.history['loss'])
+plt.plot(model.history.history['val_loss'])
+plt.title('model loss')
+plt.ylabel('loss')
+plt.xlabel('epoch')
+plt.legend(['train Loss', 'test Loss'], loc='upper right')
+plt.show()
+
+"""
+From the graph above, we once again identify peak increase and decrease in validation loss which is not ideal. 
+Therefore we can deduce that the Batch Normalization technique helped improved model learning much better than above used SGD Optimization or LRS. 
+"""
