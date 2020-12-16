@@ -1,0 +1,37 @@
+# Model Definition
+model = tf.keras.Sequential([
+    tf.keras.layers.Flatten(input_shape=(28, 28)),
+    tf.keras.layers.Dense(128, activation='relu'),
+    tf.keras.layers.BatchNormalization(),
+    tf.keras.layers.Dense(10)
+])
+
+# The Learning Rate Scheduler defined:
+lr_schedule = tf.keras.optimizers.schedules.ExponentialDecay(initial_learning_rate=1e-3, decay_steps=1500, decay_rate=0.9)
+
+# Stochastic Gradient Descent Optimizer defined:
+opt = tf.keras.optimizers.SGD(learning_rate=lr_schedule, momentum=0.98, nesterov=True)
+
+model.compile(optimizer=opt,
+              loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+              metrics=['accuracy'])
+
+# Model Fitting
+model.fit(train_images, train_labels, validation_data=(validation_images, validation_labels), epochs=10)
+
+# Plotting Losses:
+plt.plot(model.history.history['loss'])
+plt.plot(model.history.history['val_loss'])
+plt.title('model loss')
+plt.ylabel('loss')
+plt.xlabel('epoch')
+plt.legend(['train Loss', 'test Loss'], loc='upper right')
+plt.show()
+
+#For illustration, please refer to Colaboratory notebook, thank you!
+
+"""
+Yes. Learning has substantially improved from our previous illustration. 
+The validation loss is very different in it's demeanor in contrast to our previous example, 
+it does not have heightened peaks in loss.
+"""
